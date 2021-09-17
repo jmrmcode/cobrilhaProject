@@ -20,10 +20,10 @@ c = sample(model, NUTS(), 3000)
 
 # Deviance Information Criterion (DIC)
 lpfun = function f(chain::Chains) # function to compute the logpdf values
-    niter, nparams, nchains = size(chain)
+    niter, nparams, nchains = (3000, 16, 1)
     lp = zeros(niter + nchains) # resulting logpdf values
     for i = 1:nparams
-        lp += map(p -> logpdf.(Normal(sumstats[2, :mean], sumstats[1, :mean]), df.pptAPR3LAG), Array(chain[:,i,:]))
+        lp += map(p -> logpdf.(Normal(sumstats[2, :mean], sumstats[1, :mean]), df.pptAPR3LAG), Array(chain[:,i,:])) # Compute the sum of log-densities at each iteration of MCMC output for stochastic nodes.
     end
     return lp
 end
