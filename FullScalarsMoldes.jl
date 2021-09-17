@@ -140,4 +140,4 @@ end #begin
   plot!(sort(df.Espe9yMean), (ys_pred[sortperm(df.Espe9yMean)] ./ maximum(ys_pred)), yerror = stdd[sortperm(df.Espe9yMean)]./ df.Ntrials,
   seriestype = :scatter, label ="", color = "gray", alpha = 0.5)
 
-  savefig("pptAPR3LAGS.png")
+  savefig("pptAPR3LAGS.png") # save it
