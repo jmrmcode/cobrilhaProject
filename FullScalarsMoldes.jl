@@ -13,7 +13,6 @@ using SentinelArrays
 using StaticArrays
 
 
-
 ## property levels, account for NAs
 
 @model logistic_model(y, spdeiJAN, Espe9yMean, pptAPR3LAG, tmmnJAN3LAG, tmmxOCT2LAG, vciJUL0LAG, N) = begin
@@ -110,7 +109,8 @@ end #begin
   plot(chn)
 
   write("U:/juanmi/cobrilha_project/models/pptAPR321LAGS.json", chn)
-  chn = read("U:/juanmi/cobrilha_project/models/chn.json", Chains)
+  # chn = read("U:/juanmi/cobrilha_project/models/chn.json", Chains)
+  chn = Serialization.deserialize("U:/juanmi/cobrilha_project/models/pptAPR321LAGS.json")
 
   # make predictions
   m_lin_reg_test = logistic_model(Vector{Union{Missing, Float64}}(undef, length(df.CobrilhaInc)), # response
