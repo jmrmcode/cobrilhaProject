@@ -11,6 +11,7 @@ using LinearAlgebra
 using Distributed
 using SentinelArrays
 using StaticArrays
+using JLSO
 
 
 ## property levels, account for NAs
