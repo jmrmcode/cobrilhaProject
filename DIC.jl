@@ -22,3 +22,16 @@ Pd = Dbar - Dhat # effective number of parameters
 # deviance information criterion (DIC)
 DIC = Dhat + 2*Pd
 DIC = Dbar + Pd
+
+
+
+# pseudo R² = 1- (loglikehood_saturated_model / loglikehood_Null_model)
+lp = zeros(3000) # resulting logpdf values
+for i = 1:3000
+    # lp[i] = sum(map((x, n, p) -> l(x, n, p), df.CobrilhaInc[df.yearIndx .> 1], df.Ntrials[df.yearIndx .> 1], mean(qq[i][df.yearIndx .> 1]))) # Compute the sum of log-densities at each iteration of MCMC output for stochastic nodes.
+      lp[i] = sum(l.(df.CobrilhaInc[df.yearIndx .> 1], df.Ntrials[df.yearIndx .> 1], qq[i][df.yearIndx .> 1]))
+end
+loglikehood_saturated_model = mean(lp)
+loglikehood_Null_model = mean(lp)
+
+pseudoR2 = 1 - (loglikehood_saturated_model / loglikehood_Null_model)
